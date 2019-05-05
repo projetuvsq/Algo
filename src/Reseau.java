@@ -48,6 +48,16 @@ public class Reseau {
 		this .initTableauDesLiens ();
 	}
 	
+	public void initLien () {
+		lienNiveau1 ();
+		lienNiveau2 ();
+		lienNiveau3 ();
+	}
+	
+	public void creationReseau () {
+		initReseau ();
+		initLien ();
+	}
 	/**
 	 * Initialise les liens pour les noeuds de niveau 1 (blackbone)
 	 */
@@ -153,8 +163,37 @@ public class Reseau {
 		}
 	}
 	
+	public boolean estConnexe () {
+		int [] graphe = new int [100];
+		int i;
+		for (i = 0; i<100; ++i) {
+			graphe [i] = 0;
+		}
+		parcourProfondeur (0, graphe);
+		for (i=0; i<100; i++) {
+			if (graphe [i] == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public void parcourProfondeur (int idNoeud, int [] graphe) {
+		graphe [idNoeud] = 1;
+		for (int i = 0; i<100; i++) {
+			if (i == idNoeud) continue;
+			else if (this .tableauDesLiens [idNoeud][i]. getValeur() != 0 && graphe [i] == 0) {
+				parcourProfondeur (i, graphe);
+			}
+		}
+	}
+	
+	public void tableDeRoutage  (int idNoeud) {
+		
+	}
+	
 	/**
-	 * Transfere un message d'un noeud de départ à un noeud d'arrivé
+	 * Transfere un message d'un noeud de départ à un noeud d'arrivé (uniquement entre deux noeuds connectés)
 	 * @param idNoeudDepart		id du noeud de depart
 	 * @param idNoeudArrive		id du noeud d'arrivé
 	 */
