@@ -260,11 +260,11 @@ public class Reseau {
 	
 	public String chemin(Noeud depart, Noeud arrive) {
 		if (depart == arrive) {
-			return " " + arrive .getId() + " fin";
+			return "-> " + arrive .getId() + " fin";
 		}
 		else {
 			this .transfereMessage (depart .getId(), this .tableDeRoutage [depart .getId()][arrive .getId()] .getVoisin() .getId());
-			return " " + depart .getId() + chemin (this .tableDeRoutage[depart .getId()][arrive .getId()] .getVoisin(), arrive);
+			return "->" + depart .getId() + chemin (this .tableDeRoutage[depart .getId()][arrive .getId()] .getVoisin(), arrive);
 		}
 	}
 	
