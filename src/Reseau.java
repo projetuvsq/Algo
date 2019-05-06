@@ -1,7 +1,7 @@
-
 public class Reseau {
 	public Lien  [][] tableauDesLiens;
 	public Noeud [] tableauDesNoeuds;
+	public Routage [][] tableDeRoutage;
 	
 	/**
 	 * Constructeur de la classe Reseau
@@ -9,6 +9,16 @@ public class Reseau {
 	public Reseau () {
 		this .tableauDesLiens = new Lien [100][100];
 		this .tableauDesNoeuds = new Noeud [100];
+		this .tableDeRoutage = new Routage [100][100];
+	}
+	
+	public void initTableDeRoutage () {
+		int i, j;
+		for (i=0; i<100; i++) {
+			for (j=0; j<100; j++) {
+				this .tableDeRoutage [i][j] = new Routage();
+			}
+		}
 	}
 	
 	/**
@@ -46,6 +56,7 @@ public class Reseau {
 	public void initReseau () {
 		this .initTableauDesNoeuds ();
 		this .initTableauDesLiens ();
+		this .initTableDeRoutage();
 	}
 	
 	public void initLien () {
@@ -188,9 +199,27 @@ public class Reseau {
 		}
 	}
 	
-	public void tableDeRoutage  (int idNoeud) {
+	public void tableDeRoutage  () {
+		int i, j;
+		Noeud voisin;
+		for (i=0; i<100; i++) {
+			for (j = i+1; j<100; j++) {
+				voisin = premierVoisin(this .tableauDesNoeuds [i], this .tableauDesNoeuds [j]);
+				this .tableDeRoutage [i][j] .chgVoisin(voisin);
+			}
+		}
+	}
+	
+	/**
+	 * Retourne le premier voisin du plus court chemin entre un sommet de depart et un sommet d'arrivee
+	 * @param depart sommet de depart
+	 * @param arrive sommet d'arrivee
+	 * @return	premier voisin du sommet de depart
+	 */
+	public Noeud premierVoisin (Noeud depart, Noeud arrive) {
 		
 	}
+	
 	
 	/**
 	 * Transfere un message d'un noeud de départ à un noeud d'arrivé (uniquement entre deux noeuds connectés)

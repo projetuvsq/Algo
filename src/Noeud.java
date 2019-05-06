@@ -33,6 +33,14 @@ public class Noeud {
 		return this .nbLien;
 	}
 	
+	/**
+	 * Retourne l'identifiant du Noeud
+	 * @return identifiant du noeud
+	 */
+	public int getId() {
+		return this .identifiant;
+	}
+	
 	public void addLien () {
 		this .nbLien++;
 	}

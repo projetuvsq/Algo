@@ -2,16 +2,15 @@
 public class Main {
 
 	public static void main(String[] args) {
-		Reseau TableDeRoutage = new Reseau ();
+		Reseau reseau = new Reseau ();
 		System.out.println ("Création du réseau...");
-		
-		TableDeRoutage .creationReseau();
-		
-		while (!(TableDeRoutage .estConnexe())) {
-			System.out.println ("Réseau créé non-connexe, redéfinition du réseau...");
-			TableDeRoutage .creationReseau();
+		reseau .creationReseau();
+		System.out.println ("Réseau créé");
+		while (!(reseau .estConnexe())) {
+			System.out.println ("Réseau non-connexe, redéfinition du réseau...");
+			reseau .creationReseau();
 		}
-		System.out.println ("Réseau créé connexe");
+		System.out.println ("Réseau connexe");
 	}
 
 }
