@@ -1,6 +1,6 @@
-
+ 
 public class Routage {
-	Noeud voisin;
+	private Noeud voisin;
 	
 	public Routage () {
 		this .voisin = null;

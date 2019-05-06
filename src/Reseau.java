@@ -68,6 +68,7 @@ public class Reseau {
 	public void creationReseau () {
 		initReseau ();
 		initLien ();
+		testTableDeRoutage();
 	}
 	/**
 	 * Initialise les liens pour les noeuds de niveau 1 (blackbone)
@@ -199,7 +200,44 @@ public class Reseau {
 		}
 	}
 	
-	public void tableDeRoutage  () {
+	public Noeud voisinPetit(Noeud depart) {
+		int i;
+		int valeur;
+		int init = 0;
+		for (i= 0 ; i<100 ; ++i) {
+			if (i == depart .getId()) continue;
+			valeur = this .tableauDesLiens [depart .getId()][i] .getValeur();
+			if ( valeur != 0) {
+				init = valeur;
+				break;
+			}
+		}
+		Noeud voisin = this .tableauDesNoeuds [init];
+		int test; 
+		valeur = init;
+		for (i= 0 ; i<100 ; ++i) {
+			if (i == depart .getId()) continue;
+			test = this .tableauDesLiens [depart .getId()][i] .getValeur();
+			if (test != 0 && test < valeur) {
+				valeur = test;
+				voisin = this .tableauDesNoeuds[i];
+			}
+		}
+		return voisin;
+	}
+	
+	public void testTableDeRoutage () {
+		int i, j;
+		Noeud voisin;
+		for (i= 0; i<100; i++) {
+			for (j = 0; j<100; ++j) {
+				if (i == j) continue;
+				this .tableDeRoutage [i][j] .chgVoisin(voisinPetit (this .tableauDesNoeuds[i]));
+			}
+		}
+	}
+	
+	/*public void tableDeRoutage  () {
 		int i, j;
 		Noeud voisin;
 		for (i=0; i<100; i++) {
@@ -216,10 +254,23 @@ public class Reseau {
 	 * @param arrive sommet d'arrivee
 	 * @return	premier voisin du sommet de depart
 	 */
-	public Noeud premierVoisin (Noeud depart, Noeud arrive) {
+	/*public Noeud premierVoisin (Noeud depart, Noeud arrive) {
 		
+	}*/
+	
+	public String chemin(Noeud depart, Noeud arrive) {
+		if (depart == arrive) {
+			return " " + arrive .getId() + " fin";
+		}
+		else {
+			this .transfereMessage (depart .getId(), this .tableDeRoutage [depart .getId()][arrive .getId()] .getVoisin() .getId());
+			return " " + depart .getId() + chemin (this .tableDeRoutage[depart .getId()][arrive .getId()] .getVoisin(), arrive);
+		}
 	}
 	
+	public void afficheChemin (Noeud depart, Noeud arrive) {
+		System.out.println(chemin(depart, arrive));
+	}
 	
 	/**
 	 * Transfere un message d'un noeud de départ à un noeud d'arrivé (uniquement entre deux noeuds connectés)

@@ -1,9 +1,9 @@
-
+ 
 public class Noeud {
-	public int nbLien;
-	public int identifiant;
-	public int type;
-	public String message;
+	private int nbLien;
+	private int identifiant;
+	private int type;
+	private String message;
 	
 	/**
 	 * Constructeur
@@ -33,6 +33,9 @@ public class Noeud {
 		return this .nbLien;
 	}
 	
+	public int getType () {
+		return this .type;
+	}
 	/**
 	 * Retourne l'identifiant du Noeud
 	 * @return identifiant du noeud
