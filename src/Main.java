@@ -35,6 +35,7 @@ public class Main {
 			System.out.println("Envoi en cours...");
 			reseau .afficheChemin(emmeteur, receveur);
 			System.out.println("Message envoyé");
+			sr .nextLine();
 		}
 		sr .close();
 	}

@@ -1,12 +1,15 @@
 all:
 
+tar:
+	tar cvf SERHAN_PITTIS.tar bin/* src/* Makefile *.pdf *.md
 
 compile:
-	javac src/*.java
+	javac src/*.java -d ./bin/
 
 run:
-	cd src/
-	java Main.class
+	cd ./bin/ && java Main
 
 clean:
-	rm -Rf *.class
+	rm -f bin/*.class
+
+exec: clean compile run
